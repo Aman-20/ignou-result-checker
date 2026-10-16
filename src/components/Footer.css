@@ -1,0 +1,23 @@
+.site-footer {
+  margin-top: 48px;
+  background: #151b35;
+  color: #c7cde4;
+  padding: 36px 20px 24px;
+  font-size: 0.92rem;
+}
+.site-footer__grid {
+  max-width: 1000px; margin: 0 auto;
+  display: grid; gap: 28px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.site-footer h3 { color: #fff; font-size: 1rem; margin-bottom: 10px; }
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.site-footer a { color: #9db2ff; }
+.site-footer__small { margin-top: 10px; font-size: 0.82rem; color: #9aa3c4; }
+.site-footer__terms {
+  max-width: 1000px; margin: 28px auto 0; padding-top: 18px;
+  border-top: 1px solid #2a3157;
+}
+.site-footer__terms summary { cursor: pointer; color: #fff; font-weight: 600; }
+.site-footer__terms ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 6px; }
+.site-footer__copy { max-width: 1000px; margin: 22px auto 0; font-size: 0.8rem; color: #8d96b8; text-align: center; }

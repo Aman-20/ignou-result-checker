@@ -1,0 +1,6 @@
+{
+  "regions": ["bom1"],
+  "functions": {
+    "api/proxy/[...path].js": { "maxDuration": 30 }
+  }
+}
