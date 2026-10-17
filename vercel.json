@@ -3,7 +3,7 @@
     "bom1"
   ],
   "functions": {
-    "api/proxy/*.js": {
+    "api/*.js": {
       "maxDuration": 30
     }
   }

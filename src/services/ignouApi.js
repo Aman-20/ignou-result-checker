@@ -1,7 +1,7 @@
 import { parseAssignmentStatus, parseGradeCard, parseProgrammeOptions } from '../utils/parsers'
 
-const ISMS_URL = '/api/proxy/isms/changeadmdata/StatusAssignment.ASP'
-const GRADE_URL = '/api/proxy/gradecard/view_gradecard.aspx'
+const ISMS_URL = '/api/isms'
+const GRADE_URL = '/api/gradecard'
 const TIMEOUT_MS = 30000
 const RETRIES = 2
 const TYPE_CACHE_KEY = 'ignou_gradecard_type_by_programme'

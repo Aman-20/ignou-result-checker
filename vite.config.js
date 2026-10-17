@@ -6,28 +6,28 @@ const UA =
 
 // IGNOU's pages do not send CORS headers, so the browser cannot call them directly.
 // In development (and `vite preview`) these proxies forward the requests for us.
-// In production on Vercel the same URLs are served by api/proxy/[...path].js.
+// In production on Vercel the same URLs are served by api/isms.js and api/gradecard.js.
 const proxy = {
-  '/api/proxy/isms': {
+  '/api/isms': {
     target: 'https://isms.ignou.ac.in',
     changeOrigin: true,
     secure: true,
     timeout: 30000,
     proxyTimeout: 30000,
-    rewrite: (path) => path.replace(/^\/api\/proxy\/isms/, ''),
+    rewrite: (path) => path.replace(/^\/api\/isms/, '/changeadmdata/StatusAssignment.ASP'),
     headers: {
       'User-Agent': UA,
       Referer: 'https://isms.ignou.ac.in/changeadmdata/StatusAssignment.ASP',
       Origin: 'https://isms.ignou.ac.in',
     },
   },
-  '/api/proxy/gradecard': {
+  '/api/gradecard': {
     target: 'https://gradecard.ignou.ac.in',
     changeOrigin: true,
     secure: true,
     timeout: 30000,
     proxyTimeout: 30000,
-    rewrite: (path) => path.replace(/^\/api\/proxy\/gradecard/, ''),
+    rewrite: (path) => path.replace(/^\/api\/gradecard/, '/view_gradecard.aspx'),
     headers: { 'User-Agent': UA },
   },
 }
