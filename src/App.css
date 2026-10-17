@@ -1,4 +1,13 @@
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 .app__main {
+  flex: 1 0 auto;
+  align-content: start;
   width: 100%;
   max-width: 1040px;
   margin: -64px auto 0;
@@ -8,6 +17,7 @@
   gap: 22px;
   position: relative;
 }
+
 .app__main > * { min-width: 0; }
 .app__result { min-width: 0; }
 
