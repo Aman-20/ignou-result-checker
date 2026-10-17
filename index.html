@@ -1,21 +1,64 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Check your IGNOU grade card and assignment status in one place. Unofficial tool." />
-    <meta name="theme-color" content="#0F1B3D" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>IGNOU Result Checker</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>IGNOU Result Checker – Grade Card &amp; Assignment Status</title>
+  <meta name="description"
+    content="Check your IGNOU grade card and assignment status in one place. See marks, estimated percentage and pass/fail, and download the result as PDF or image." />
+  <meta name="keywords"
+    content="IGNOU grade card, IGNOU assignment status, IGNOU result checker, IGNOU percentage calculator, IGNOU marks" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://ignou-result-checker.vercel.app/" />
+  <meta name="theme-color" content="#1e1b6e" />
+
+  <!-- Google Search Console: paste your verification tag here -->
+  <!-- <meta name="google-site-verification" content="YOUR_CODE" /> -->
+
+  <!-- Link previews (WhatsApp, Telegram, LinkedIn, X) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="IGNOU Result Checker" />
+  <meta property="og:title" content="IGNOU Result Checker – Grade Card &amp; Assignment Status" />
+  <meta property="og:description"
+    content="Check your IGNOU grade card and assignment status in one place. Download as PDF or image." />
+  <meta property="og:url" content="https://ignou-result-checker.vercel.app/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="IGNOU Result Checker" />
+  <meta name="twitter:description" content="Check your IGNOU grade card and assignment status in one place." />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "IGNOU Result Checker",
+        "url": "https://ignou-result-checker.vercel.app/",
+        "description": "Check your IGNOU grade card and assignment status in one place.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" }
+      }
+    </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <noscript>
+    IGNOU Result Checker: check your IGNOU grade card and assignment status. Please enable
+    JavaScript to use this website.
+  </noscript>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+
 </html>
