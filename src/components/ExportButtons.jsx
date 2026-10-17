@@ -1,10 +1,16 @@
-import { useState } from 'react'
-import { exportAsImage, exportAsPdf } from '../utils/exportUtils'
+import { useEffect, useState } from 'react'
+import { exportAsImage, exportAsPdf, preloadExport } from '../utils/exportUtils'
 
 // Rendered inside the card it exports; data-html2canvas-ignore keeps it out of the file.
 export default function ExportButtons({ targetRef, filename }) {
   const [busy, setBusy] = useState('')
   const [error, setError] = useState('')
+
+  // Fetch the export libraries while the person reads their result.
+  useEffect(() => {
+    const idle = window.requestIdleCallback || ((fn) => setTimeout(fn, 500))
+    idle(preloadExport)
+  }, [])
 
   const run = async (kind) => {
     if (!targetRef.current) return

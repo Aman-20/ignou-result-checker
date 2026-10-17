@@ -1,7 +1,17 @@
 // Image / PDF export. Libraries are loaded on demand so they don't slow the first page load.
 // Elements (or ancestors) with the attribute data-html2canvas-ignore are left out of the export.
 
-async function renderToCanvas(node, scale = 2) {
+// Start downloading the export libraries in the background (called once results are on screen),
+// so the first click on a download button doesn't have to wait for them.
+export function preloadExport() {
+  import('html2canvas').catch(() => {})
+  import('jspdf').catch(() => {})
+}
+
+// 1.5x is sharp enough for a result card and much faster than 2x (about 45% fewer pixels).
+const SCALE = 1.5
+
+async function renderToCanvas(node, scale = SCALE) {
   const { default: html2canvas } = await import('html2canvas')
   return html2canvas(node, {
     scale,
@@ -12,6 +22,13 @@ async function renderToCanvas(node, scale = 2) {
     windowWidth: Math.max(node.scrollWidth, node.clientWidth, 1000),
     onclone: (doc) => {
       doc.querySelectorAll('.table-wrap').forEach((el) => { el.style.overflow = 'visible' })
+      // Shadows, transitions and sticky columns are the slowest things for html2canvas to draw
+      // and add nothing to a saved file.
+      const style = doc.createElement('style')
+      style.textContent =
+        '*{box-shadow:none!important;transition:none!important;animation:none!important}' +
+        '.data-table th:first-child,.data-table td:first-child{position:static!important}'
+      doc.head.appendChild(style)
     },
   })
 }
@@ -31,8 +48,7 @@ export async function exportAsImage(node, filename) {
 }
 
 export async function exportAsPdf(node, filename) {
-  // 1.5x is plenty sharp for a PDF and keeps the file small.
-  const canvas = await renderToCanvas(node, 1.5)
+  const canvas = await renderToCanvas(node)
   const { jsPDF } = await import('jspdf')
 
   const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4', compress: true })
