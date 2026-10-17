@@ -1,37 +1,65 @@
-# IGNOU Grade Card & Assignment Status Checker
+# IGNOU Result Checker
 
-## Use it in your existing Vite + React project
+Check your IGNOU **grade card** and **assignment / practical status** in one place. Enter your enrolment number and programme code to see your marks, estimated percentage and submission status, then download the result as an image or PDF.
 
-1. Copy `src/` (all files, replacing your `App.jsx`, `main.jsx`, `index.css`) and `vite.config.js` into your project.
-2. Install the export libraries: `npm install html2canvas jspdf`
-3. Run `npm run dev` and open the page.
+**Live site:** https://ignou-result-checker.vercel.app
 
-## Important: the proxy
+## Features
 
-IGNOU's servers do not allow browser requests from other websites (no CORS headers), so the page
-cannot call them directly. `vite.config.js` forwards these paths while you develop:
+- Course-wise grade card with assignment, lab and term-end marks
+- Estimated percentage per course and overall (30% assignment + 70% term-end)
+- Term-end theory below 40 is shown in red as fail; assignment or lab marks below 40 are shown in amber
+- Download as PNG or PDF
+- Responsive on mobile and desktop
+- No login, and nothing about the student is stored on the server
 
-| App calls | Forwarded to |
+## Tech stack
+
+React 19, Vite, html2canvas, jsPDF, and Vercel serverless functions for the IGNOU proxy.
+
+## Run locally
+
+Requires Node.js 20.19 or newer.
+
+```bash
+npm install
+npm run dev
+```
+
+| Command | What it does |
 |---|---|
-| `/proxy/isms/...` | `https://isms.ignou.ac.in/...` |
-| `/proxy/gradecard/...` | `https://gradecard.ignou.ac.in/...` |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Production build |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run oxlint |
+| `npm test` | Run the parser and API tests (needs `jsdom`) |
 
-The Vite proxy only works with `npm run dev` / `npm run preview`. When you deploy, host the same two
-rewrites (Netlify/Vercel rewrites or `_redirects` can proxy to an external URL, or use a small
-serverless function). The POST to `/proxy/isms` should send the `Referer`, `Origin` and a browser
-`User-Agent` as in `vite.config.js`. IGNOU may also block some hosting providers' IP ranges, so test
-from your real deployment.
+## Deploy
 
-## Where things are
+1. Push the project to GitHub.
+2. Import it in [Vercel](https://vercel.com) and click **Deploy**. No environment variables are needed.
 
-| File | Job |
-|---|---|
-| `src/App.jsx` | Page layout, state, runs both checks in parallel |
-| `src/services/ignouApi.js` | Requests, retries, grade card `type` 1-4 probing (cached per programme) |
-| `src/utils/parsers.js` | HTML to data for both pages |
-| `src/utils/calc.js` | Estimated percentages and summaries |
-| `src/utils/exportUtils.js` | PNG and PDF export |
-| `src/config/siteInfo.js` | Footer text, your contact email, official links |
-| `src/components/*` | Header, Footer, SearchForm, GradeCardResult, AssignmentResult, ExportButtons (+ CSS) |
+IGNOU's servers don't allow requests straight from a browser, so the app calls its own `/api/isms` and `/api/gradecard` routes (`api/` folder), which forward to IGNOU. In development, `vite.config.js` does the same.
 
-Test the parsers against the sample markup: `npm run test:parsers`
+## Project structure
+
+```
+api/        Serverless functions (IGNOU proxy)
+scripts/    Test scripts
+src/
+  components/   UI components
+  config/       Footer text, contact links, notes (siteInfo.js)
+  services/     IGNOU requests and retries
+  utils/        Parsers, marks calculation, PNG/PDF export
+```
+
+## Customise
+
+- Contact details, notes and fallback programme list: `src/config/siteInfo.js`
+- Pass marks: `TERM_END_PASS_MARK` and `COMPONENT_PASS_MARK` in `src/utils/calc.js`
+- Colours: CSS variables at the top of `src/index.css`
+
+
+---
+ 
+Built with ❤️ for IGNOU students. Feedback and contributions are welcome.

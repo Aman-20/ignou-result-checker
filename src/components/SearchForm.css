@@ -1,32 +1,62 @@
 .search-form {
-  background: var(--surface);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 24px;
-  display: grid;
-  gap: 18px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 22px; box-shadow: var(--shadow-lg);
+  padding: 28px; display: grid; gap: 20px;
 }
-.search-form__fields { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-.search-form label > span { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+.search-form__fields { display: grid; gap: 18px; grid-template-columns: 1fr 1fr; }
+.search-form label > span {
+  display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 7px;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+}
 .search-form input[type='text'],
 .search-form input:not([type]),
 .search-form input[list] {
-  width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;
+  width: 100%; height: 50px; padding: 0 16px; font-size: 1rem;
+  border: 1.5px solid var(--border); border-radius: 12px; background: #f8f9fd;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
 }
-.search-form input:focus-visible { outline: 3px solid var(--primary-soft); border-color: var(--primary); }
+.search-form input::placeholder { color: #a3acc2; }
+.search-form input:hover { border-color: #cdd3e4; }
+.search-form input:focus-visible {
+  outline: none; background: #fff; border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.14);
+}
 
 .search-form__choices { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-.search-form__choices legend { font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; padding: 0; }
+.search-form__choices legend {
+  font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; padding: 0;
+  color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em;
+}
 .chip {
-  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
-  padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px; font-size: 0.92rem;
+  display: inline-flex; align-items: center; gap: 9px; cursor: pointer;
+  padding: 10px 16px; border: 1.5px solid var(--border); border-radius: 12px;
+  font-size: 0.92rem; font-weight: 500; background: #fff; transition: all 0.15s;
 }
-.chip:has(input:checked) { background: var(--primary-soft); border-color: var(--primary); }
+.chip:hover { border-color: #b9c1dc; }
+.chip input { width: 17px; height: 17px; accent-color: var(--primary); margin: 0; }
+.chip:has(input:checked) { background: var(--primary-soft); border-color: var(--primary); color: var(--primary-dark); }
 
-.search-form__error { color: var(--bad); font-size: 0.9rem; }
-.search-form__submit {
-  background: var(--primary); color: #fff; border: 0; border-radius: 10px;
-  padding: 13px 18px; font-weight: 600; cursor: pointer;
+.search-form__error {
+  color: var(--bad); font-size: 0.9rem; background: var(--bad-soft);
+  padding: 10px 14px; border-radius: 10px;
 }
-.search-form__submit:hover:not(:disabled) { background: var(--primary-dark); }
-.search-form__submit:disabled { opacity: 0.7; cursor: progress; }
+.search-form__submit {
+  justify-self: start; min-width: 220px; height: 50px; padding: 0 28px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed); color: #fff;
+  border: 0; border-radius: 12px; font-weight: 700; font-size: 1rem; cursor: pointer;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+  transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+}
+.search-form__submit:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.06); box-shadow: 0 12px 26px rgba(79, 70, 229, 0.4); }
+.search-form__submit:active:not(:disabled) { transform: translateY(0); }
+.search-form__submit:disabled { opacity: 0.75; cursor: progress; }
+
+@media (max-width: 640px) {
+  .search-form { padding: 18px; gap: 18px; border-radius: 18px; }
+  .search-form__fields { grid-template-columns: 1fr; gap: 14px; }
+  /* 16px stops iOS Safari zooming into the field */
+  .search-form input[type='text'], .search-form input:not([type]), .search-form input[list] { font-size: 16px; }
+  .search-form__choices { flex-direction: column; gap: 8px; }
+  .chip { width: 100%; padding: 12px 14px; }
+  .search-form__submit { width: 100%; justify-self: stretch; font-size: 0.95rem; padding: 0 16px; }
+}

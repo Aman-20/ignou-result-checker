@@ -1,23 +1,38 @@
 .site-header {
-  background: linear-gradient(135deg, #1f33a3 0%, #2f4bd8 55%, #4b6cf0 100%);
-  color: #fff;
-  padding: 40px 20px 72px;
-  text-align: center;
+  position: relative; overflow: hidden; color: #fff; text-align: center;
+  padding: 56px 20px 112px;
+  background:
+    radial-gradient(600px 300px at 15% 0%, rgba(167, 139, 250, 0.45), transparent 70%),
+    radial-gradient(500px 280px at 90% 20%, rgba(56, 189, 248, 0.30), transparent 70%),
+    linear-gradient(135deg, #1e1b6e 0%, #3730a3 45%, #5b3fd6 100%);
 }
-.site-header__inner { max-width: 760px; margin: 0 auto; }
+.site-header__inner { position: relative; max-width: 760px; margin: 0 auto; }
 .site-header__badge {
-  width: 56px; height: 56px; margin: 0 auto 14px;
-  display: grid; place-items: center; font-size: 28px;
-  background: rgba(255, 255, 255, 0.16); border-radius: 16px;
+  width: 60px; height: 60px; margin: 0 auto 18px; display: grid; place-items: center;
+  background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 18px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
-.site-header h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); line-height: 1.2; }
-.site-header__sub { margin-top: 12px; color: rgba(255, 255, 255, 0.88); }
+.site-header h1 {
+  font-size: clamp(1.6rem, 4.2vw, 2.4rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 800;
+}
+.site-header__sub { margin: 14px auto 0; max-width: 620px; color: rgba(255, 255, 255, 0.86); font-size: 1.02rem; }
 .site-header__points {
-  list-style: none; padding: 0; margin: 18px 0 0;
+  list-style: none; padding: 0; margin: 22px 0 0;
   display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
 }
 .site-header__points li {
-  font-size: 0.85rem; padding: 4px 12px; border-radius: 999px;
-  background: rgba(255, 255, 255, 0.16);
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.84rem; font-weight: 500; padding: 6px 14px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.2);
 }
-.site-header__note { margin-top: 16px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.75); }
+.site-header__points li::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7;
+}
+
+@media (max-width: 640px) {
+  .site-header { padding: 36px 16px 90px; }
+  .site-header__badge { width: 52px; height: 52px; margin-bottom: 14px; }
+  .site-header__sub { font-size: 0.92rem; }
+  .site-header__points { margin-top: 18px; }
+  .site-header__points li { font-size: 0.78rem; padding: 5px 11px; }
+}

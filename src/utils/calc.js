@@ -1,10 +1,11 @@
 // Grade maths. Everything here is an ESTIMATE for display only.
 // IGNOU's usual scheme: theory courses = 30% assignment + 70% term-end exam,
-// with a minimum of 35% in the term-end exam. Practical courses are shown as the
+// with a minimum of 40% in the term-end exam (and 40% in assignments). Practical courses are shown as the
 // average of the marks recorded so far. The official grade card is the only
 // authoritative source.
 
-export const TERM_END_PASS_MARK = 35
+export const TERM_END_PASS_MARK = 40
+export const COMPONENT_PASS_MARK = 40
 export const ASSIGNMENT_WEIGHT = 0.3
 export const THEORY_WEIGHT = 0.7
 

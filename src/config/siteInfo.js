@@ -2,10 +2,16 @@
 
 export const SITE = {
   name: 'IGNOU Result Checker',
-  // Your own contact details for the site. Leave an empty string to hide a line.
-  contactEmail: '',
-  contactNote: 'For problems with this website (not with your IGNOU records), write to us.',
+  contactEmail: 'aman.nishad.dev@gmail.com',
+  contactNote: 'Found a bug or have a suggestion for this website? Get in touch.',
 }
+
+// Contact / social links shown in the footer. `icon` must match a key in Footer.jsx.
+export const SOCIAL_LINKS = [
+  { label: 'GitHub', href: 'https://github.com/Aman-20', icon: 'github' },
+  { label: 'X', href: 'https://x.com/Aman7109', icon: 'x' },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/aman-nishad-dev', icon: 'linkedin' },
+]
 
 // Official IGNOU pages. Phone numbers and e-mail addresses change, so for those
 // please use the official contact page rather than copying numbers into this app.
@@ -23,6 +29,6 @@ export const FALLBACK_PROGRAMMES = [
 
 export const PASS_NOTES = [
   'Theory courses: 30% weight on assignments and 70% on the term-end exam (estimate shown here).',
-  'A minimum of 35% in the term-end theory exam is normally required, shown in red when below that.',
+  'IGNOU also expects at least 40% in assignments and practicals. Marks below 40 there are shown in amber as a warning.',
   'A dash (-) means marks are not recorded yet. It does not mean zero.',
 ]

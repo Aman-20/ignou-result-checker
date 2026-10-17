@@ -49,14 +49,14 @@ export default function AssignmentResult({ status }) {
           <tbody>
             {rows.map((r, i) => (
               <tr key={`${r.kind}-${r.course}-${r.session}-${i}`}>
-                <td>{r.kind}</td>
-                <td><strong>{r.course}</strong></td>
-                <td>{r.session}</td>
-                <td>
+                <td className="cell-title" data-label="Type">{r.kind}</td>
+                <td data-label="Course"><strong>{r.course}</strong></td>
+                <td data-label="Session">{r.session}</td>
+                <td data-label="Status">
                   <span className={`badge badge--${CATEGORY_CLASS[r.category]}`}>{CATEGORY_LABEL[r.category]}</span>
                   <div className="status-text">{r.statusText}</div>
                 </td>
-                <td>{r.date}</td>
+                <td data-label="Date">{r.date}</td>
               </tr>
             ))}
           </tbody>
@@ -65,7 +65,6 @@ export default function AssignmentResult({ status }) {
 
       <ul className="notes">
         <li>&ldquo;Marks recorded&rdquo; means IGNOU has updated your marks. See the grade card for the marks themselves.</li>
-        <li>Indicative only, no legal validity. Verify with your Study Centre or Regional Centre.</li>
       </ul>
     </section>
   )

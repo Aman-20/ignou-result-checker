@@ -1,6 +1,6 @@
 import { useMemo, useRef } from 'react'
 import ExportButtons from './ExportButtons'
-import { summariseGradeCard, TERM_END_PASS_MARK, classifyComponent } from '../utils/calc'
+import { summariseGradeCard, TERM_END_PASS_MARK, COMPONENT_PASS_MARK, classifyComponent } from '../utils/calc'
 import { safeFilename } from '../utils/exportUtils'
 import { PASS_NOTES } from '../config/siteInfo'
 import './Results.css'
@@ -18,13 +18,19 @@ export default function GradeCardResult({ card }) {
         <div>
           <h2>Grade card status</h2>
           <p className="result-card__meta">
-            {card.studentName && <><strong>{card.studentName}</strong> · </>}
             Enrolment {card.enrolmentNo} · {card.programmeCode}
             {card.asOn && <> · as on {card.asOn}</>}
           </p>
         </div>
         <ExportButtons targetRef={ref} filename={safeFilename(`gradecard_${card.enrolmentNo}`)} />
       </div>
+
+      {card.studentName && (
+        <div className="student">
+          <span className="student__label">Student name</span>
+          <strong className="student__name">{card.studentName}</strong>
+        </div>
+      )}
 
       <div className="stats">
         <div className="stat"><b>{summary.total}</b><span>Courses</span></div>
@@ -49,17 +55,20 @@ export default function GradeCardResult({ card }) {
           <tbody>
             {summary.perCourse.map(({ course, percentage, basis, belowTermEndPass }) => (
               <tr key={course.code}>
-                <td><strong>{course.code}</strong></td>
+                <td className="cell-title" data-label="Course"><strong>{course.code}</strong></td>
                 {course.components.map((c) => {
-                  const failed = classifyComponent(c.label) === 'theory' && belowTermEndPass
+                  const kind = classifyComponent(c.label)
+                  const failed = kind === 'theory' && belowTermEndPass
+                  const low = !failed && kind !== 'theory' && c.value != null && c.value < COMPONENT_PASS_MARK
+                  const cls = failed ? 'cell-bad' : low ? 'cell-warn' : c.value == null ? 'cell-empty' : ''
                   return (
-                    <td key={c.label} className={failed ? 'cell-bad' : c.value == null ? 'cell-empty' : ''}>
+                    <td key={c.label} className={cls} data-label={c.label}>
                       {c.raw || '-'}
                     </td>
                   )
                 })}
-                <td title={basis}>{percentage == null ? '–' : `${percentage}%`}</td>
-                <td><span className={`badge badge--${STATUS_CLASS[course.status]}`}>{STATUS_LABEL[course.status]}</span></td>
+                <td data-label="Est. %" title={basis}>{percentage == null ? '–' : `${percentage}%`}</td>
+                <td data-label="Status"><span className={`badge badge--${STATUS_CLASS[course.status]}`}>{STATUS_LABEL[course.status]}</span></td>
               </tr>
             ))}
           </tbody>
@@ -68,8 +77,7 @@ export default function GradeCardResult({ card }) {
 
       <ul className="notes">
         {PASS_NOTES.map((n) => <li key={n}>{n}</li>)}
-        <li>Term-end marks below {TERM_END_PASS_MARK} are highlighted in red. Percentages are estimates, not official results.</li>
-        <li>Indicative only, no legal validity. Verify with IGNOU.</li>
+        <li>Term-end theory marks below {TERM_END_PASS_MARK} are highlighted in red (fail). Percentages are estimates, not official results.</li>
       </ul>
     </section>
   )
